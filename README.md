@@ -1,6 +1,6 @@
 # 🤖 Self-Healing RAG Agent with LangGraph
 
-A Self-Healing Retrieval-Augmented Generation (RAG) Agent built with LangGraph, Qdrant, Hugging Face embeddings, and LLM-as-a-Judge evaluation. <br>
+A Self-Healing Retrieval-Augmented Generation (RAG) Agent built with LangGraph, ChromaDB, Hugging Face embeddings, and LLM-as-a-Judge evaluation. <br>
 This project demonstrates how to design an agentic RAG system that can:
 
 * Detect retrieval failures
@@ -11,7 +11,7 @@ This project demonstrates how to design an agentic RAG system that can:
 ## 🚀 Key Features
 
 * Agentic control flow with LangGraph
-* Vector search using Qdrant
+* Vector search using ChromaDB
 * Dense embeddings + cross-encoder reranking
 * LLM-as-a-Judge scoring (faithfulness + relevance)
 * Automatic self-healing retries
@@ -88,7 +88,7 @@ Self-Healing-RAG/
 
 * LangGraph – agentic workflows
 * LangChain – document loading & splitting
-* Qdrant – vector database
+* ChromaDB – vector database
 * FastEmbed – Hugging Face embeddings
 * Cross-Encoder Reranker – relevance refinement
 * Google Gemini – answer generation
@@ -97,7 +97,9 @@ Self-Healing-RAG/
 
 ### Dependencies
 
+* `chromadb` >= 0.4.0
 * `fastembed` >= 0.7.4
+* `google-generativeai` >= 0.3.0
 * `hf-xet` >= 1.2.0
 * `ipykernel` >= 7.1.0
 * `langchain-community` >= 0.4.1
@@ -105,11 +107,10 @@ Self-Healing-RAG/
 * `langchain-text-splitters` >= 1.1.0
 * `langgraph` >= 1.0.5
 * `numpy` >= 2.4.0
-* `openai` >= 2.14.0
 * `pypdf` >= 6.5.0
-* `qdrant-client` >= 1.16.2
+* `python-dotenv` >= 1.1.0
 * `sentence-transformers` >= 5.2.0
-* `streamlit` >= 1.52
+* `streamlit` >= 1.52.2
 
 ## 🧪 How the LLM-as-a-Judge Works
 
@@ -160,20 +161,20 @@ This explicit state design makes the system:
 ### 1️⃣ Install dependencies
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
-(Ensure you have qdrant-client, fastembed, langgraph, streamlit, and openai installed.)
+(This installs all dependencies from `pyproject.toml` into a virtual environment.)
 
 ### 2️⃣ Run Streamlit
 
 ```bash
-streamlit run app.py
+uv run streamlit run app.py
 ```
 
 ### 3️⃣ Usage
 
-1. Enter your OpenAI API key
+1. Enter your Gemini API key
 2. Upload a PDF document
 3. Ask questions about the document
 4. Watch the agent:
